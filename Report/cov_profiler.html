@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    </head>
+    <body>
+        <script language="javascript" type="text/javascript">
+            function showdetail(pid){
+                var div_pre = document.getElementsByClassName('covstyle')
+                console.log(div_pre)
+                for (var i=0;i<div_pre.length;i++){
+                    if (div_pre[i].id != pid){
+                        div_pre[i].style.display = "none"
+                    }else{
+                        div_pre[i].style.display = "block"
+                    }
+                }
+            }
+        </script>
+        <table border="1">
+            <tr>
+                <th>js名称</th>
+                <!--<th>覆盖率统计情况</th>-->
+            </tr>
+            <tr> <td><a href="javascript:;" onclick="showdetail(0)">file:///C:/Users/zyj/PycharmProjects/uitest-server/test.js</a></td>  </tr> <tr> <td><a href="javascript:;" onclick="showdetail(1)">file:///C:/Users/zyj/PycharmProjects/uitest-server/test_other.js</a></td>  </tr> 
+        </table>
+        <div id='pre'>
+        <pre id="0" class="covstyle" style="display:none;">
+    function fa(){
+    document.getElementById('H').innerHTML="点击了A，触发了A方法"
+};
+<font style="background:yellow" bgcolor="yellow">function fb(){
+   document.getElementById('H').innerHTML="点击了B，触发了B方法"
+}</font>;
+<font style="background:yellow" bgcolor="yellow">function fc(){
+    document.getElementById('H').innerHTML="点击了C，触发了C方法"
+}</font>
+ 
+    </pre><pre id="1" class="covstyle" style="display:none;">
+    <font style="background:yellow" bgcolor="yellow">function fd(){
+    document.getElementById('H').innerHTML="点击了D，触发了D方法，D在另一个js里"
+}</font>; 
+    </pre>
+        </div> 
+
+    </body> 
+
+    </html>
+   
+    

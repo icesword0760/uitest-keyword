@@ -1,0 +1,4 @@
+{
+  "pytest4.py::test_ehlo": true,
+  "test4.py": true
+}

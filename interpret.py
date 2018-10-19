@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from case import cases
 from elementdb import element
 from keyworddb import keyword
+from selenium import webdriver
 import function
 import inspect
 
@@ -36,10 +37,10 @@ class Interpret(object):
                 if k == 'name':
                     self.bind_casename(v)
                 if k == 'action' or k == 'validate':
-                    f_name = keyword[v]
-                    func = getattr(function, f_name)
-                    f_parmeters = inspect.signature(func).parameters.values()
-                    parmeter_list = self.interpret_parmeters(_['parmeters'],f_parmeters)
+                    func_name = keyword[v]
+                    func = getattr(function, func_name)
+                    func_parmeters = inspect.signature(func).parameters.values()#func_parmeters是获取到的函数的参数列表
+                    parmeter_list = self.interpret_parmeters(_['parmeters'],func_parmeters)
                     action = {func:parmeter_list}
                     self.bind_action_list(action)
 
@@ -58,7 +59,11 @@ class Interpret(object):
                 parmeter_list[index] = element_tuple
             if f_type == 'driver':
                 #print(type(self.driver))
+                #parmeter_list[index] = '$Web_Driver'
                 parmeter_list.append('$Web_Driver')
+                #parmeter_list.append(self.driver)
+            if f_type == 'chrome':
+                parmeter_list.append('$Chrome_Dev')
         return parmeter_list
 
     @classmethod
@@ -68,6 +73,14 @@ class Interpret(object):
                 for index, _ in enumerate(v):
                     if _ == '$Web_Driver':
                         v[index] = driver
+
+    @classmethod
+    def replace_chrome(self, actions, chrome):
+        for action in actions:
+            for v in action.values():
+                for index, _ in enumerate(v):
+                    if _ == '$Chrome_Dev':
+                        v[index] = chrome
 
     def bind_action_list(self, action):
         self.testcase['actions'].append(action)
